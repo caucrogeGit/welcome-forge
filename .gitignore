@@ -1,0 +1,24 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Environnements (valeurs reelles, non commitees)
+env/dev
+env/prod
+env/*.local
+
+# Dependances front
+node_modules/
+
+# Certificats SSL de developpement
+cert.pem
+key.pem
+
+# Donnees runtime
+storage/uploads/*
+!storage/uploads/.gitkeep
+storage/logs/*
+!storage/logs/.gitkeep
+storage/mail/*
+!storage/mail/.gitkeep

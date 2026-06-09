@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>500 - Erreur serveur</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/static/tailwind.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="text-center">
+        <p class="text-8xl font-bold text-blue-700">500</p>
+        <h1 class="text-2xl font-semibold text-gray-800 mt-4">Erreur interne du serveur</h1>
+        <p class="text-gray-500 mt-2">Une erreur inattendue s'est produite. Veuillez réessayer plus tard.</p>
+        <a href="/" class="mt-6 inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+            Retour à l'accueil
+        </a>
+        {% if error %}
+        <div class="mt-8 max-w-3xl mx-auto text-left bg-white border border-red-200 rounded-lg shadow-sm overflow-hidden">
+            <div class="bg-red-50 px-4 py-3 border-b border-red-200">
+                <p class="text-sm font-semibold text-red-700">{{ error.type }}</p>
+                <p class="text-sm text-red-600 mt-1">{{ error.message }}</p>
+            </div>
+            <pre class="text-xs text-gray-700 p-4 overflow-x-auto whitespace-pre-wrap">{{ error.traceback }}</pre>
+            <p class="text-xs text-gray-400 px-4 pb-3">Détails affichés uniquement en mode développement (APP_ENV=dev).</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

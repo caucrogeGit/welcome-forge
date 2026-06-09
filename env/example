@@ -1,0 +1,76 @@
+# Application
+APP_NAME=welcome-forge
+APP_ROUTES_MODULE=mvc.routes
+
+# Administration MariaDB globale.
+# Politique Forge (ENV-PROD-DB-ADMIN-SECRETS-POLICY-001) :
+#   - DB_ADMIN_* est RÉSERVÉ aux commandes CLI de provisioning
+#     (forge db:init, création BDD/utilisateur/grants). Le runtime
+#     applicatif Forge n'utilise QUE DB_APP_*.
+#   - En PRODUCTION : ne JAMAIS stocker un mot de passe root/admin réel
+#     dans env/prod. Utiliser un fichier local non commité comme
+#     env/db-admin.local (ignoré par .gitignore via env/*.local) ou
+#     des variables d'environnement du shell de provisioning.
+#   - En développement local, `root` MariaDB reste acceptable.
+DB_ADMIN_HOST=localhost
+DB_ADMIN_PORT=3306
+DB_ADMIN_LOGIN=root
+DB_ADMIN_PWD=
+
+# Base projet
+DB_NAME=welcome_forge_db
+DB_CHARSET=utf8mb4
+DB_COLLATION=utf8mb4_unicode_ci
+
+# Utilisateur applicatif du projet
+DB_APP_HOST=localhost
+DB_APP_PORT=3306
+DB_APP_LOGIN=forge
+DB_APP_PWD=
+DB_POOL_SIZE=5
+# DB_APP_PRIVILEGES=SELECT,INSERT,UPDATE,DELETE,CREATE,ALTER,DROP,INDEX,REFERENCES
+
+# Uploads
+UPLOAD_ROOT=storage/uploads
+UPLOAD_MAX_SIZE=5242880
+UPLOAD_ALLOWED_EXTENSIONS=jpg,jpeg,png,webp,pdf
+UPLOAD_ALLOWED_MIME_TYPES=image/jpeg,image/png,image/webp,application/pdf
+
+# Mail
+# En développement, Forge n'envoie pas de vrais mails par défaut.
+# MAIL_ENABLED=false force NullTransport — aucune connexion SMTP n'est tentée.
+# MAIL_TRANSPORT=log écrit les messages dans storage/mail/ (fichiers .eml).
+# Pour activer l'envoi réel, définissez ces variables dans env/dev (non commité).
+MAIL_ENABLED=false
+MAIL_TRANSPORT=log
+# Expéditeur — MAIL_FROM est prioritaire. Si vide, composé de MAIL_FROM_NAME + MAIL_FROM_ADDRESS.
+MAIL_FROM=
+MAIL_FROM_ADDRESS=noreply@localhost
+MAIL_FROM_NAME=Forge
+# Serveur SMTP (requis si MAIL_TRANSPORT=smtp)
+MAIL_HOST=
+MAIL_PORT=587
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_USE_TLS=false
+MAIL_USE_SSL=false
+MAIL_TIMEOUT=10
+# Chemins
+MAIL_LOG_DIR=storage/mail
+MAIL_TEMPLATES_DIR=mvc/mail/templates
+# Journalisation SQL (nécessite forge db:apply pour créer la table mail_log)
+MAIL_LOG_ENABLED=false
+
+# Serveur
+APP_HOST=127.0.0.1
+APP_PORT=8000
+# Dev : HTTPS local par défaut. Prod derrière Nginx : HTTP local par défaut.
+# APP_SSL_ENABLED=true
+
+# Certificats SSL (générés avec openssl, voir app.py)
+SSL_CERTFILE=cert.pem
+SSL_KEYFILE=key.pem
+
+# Nonce CSP optionnel (désactivé par défaut)
+# Activer pour permettre des scripts inline contrôlés ({{ csp_nonce() }} dans les templates)
+APP_CSP_NONCE_ENABLED=false

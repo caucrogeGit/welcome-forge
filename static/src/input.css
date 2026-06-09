@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+@source "../../mvc/views/landing/index.html";
+@source "../../docs/index.html";
+
+@layer components {
+  .tab-active {
+    border-bottom-color: #E8651A !important;
+    color: #fff !important;
+  }
+
+  .landing-code-font pre,
+  .landing-code-font code {
+    font-family: ui-monospace, "SFMono-Regular", "Cascadia Code", Menlo, monospace;
+  }
+
+  .landing-accent-bg {
+    background: #E8651A;
+  }
+
+  .landing-accent-text {
+    color: #E8651A;
+  }
+
+  .landing-version-strip {
+    margin-top: -130px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .landing-hero-bg {
+    background: linear-gradient(160deg, #111110 0%, #1e1a17 100%);
+  }
+
+  .landing-logo-glow {
+    filter: drop-shadow(0 0 32px rgba(232, 101, 26, 0.5));
+  }
+
+  .landing-logo-size {
+    width: 320px;
+    height: 320px;
+  }
+
+  .landing-panel {
+    background: #0d0f14;
+  }
+
+  .landing-icon-chip {
+    background: #fff3ea;
+    color: #E8651A;
+  }
+
+  .landing-copy-btn {
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  .landing-dark-card {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .landing-highlight-note {
+    background: #fff3ea;
+    border-color: rgba(232, 101, 26, 0.2);
+    color: #111;
+  }
+
+  .landing-manifesto-list {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2.5rem;
+  }
+
+  .landing-search-input {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid #E8651A;
+    border-radius: 8px;
+    padding: 0.375rem 0.75rem;
+    color: white;
+    font-size: 0.875rem;
+    width: 200px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .landing-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .landing-search-input:focus {
+    border-color: rgba(232, 101, 26, 0.5);
+  }
+
+  .landing-search-btn {
+    width: 35px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid #E8651A;
+    border-radius: 8px;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .landing-search-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+  }
+
+  .syntax-key {
+    color: #e06c75;
+  }
+
+  .syntax-string {
+    color: #98c379;
+  }
+
+  .syntax-number {
+    color: #d19a66;
+  }
+
+  .syntax-keyword {
+    color: #c678dd;
+  }
+
+  .syntax-type {
+    color: #61afef;
+  }
+
+  .syntax-command {
+    color: #e5c07b;
+  }
+
+  /* === Alternance de fonds de sections (LANDING-BG-ALT-001) ===
+     Une section = .sec-light OU .sec-dark. Le fond, la couleur des titres,
+     des cartes (.card) et du texte secondaire (.muted) en découlent par
+     descendance — inverser l'ordre = changer une classe par section.
+     Les îlots .landing-panel (showcases, blocs de code) restent sombres
+     quelle que soit la section. */
+  .sec-light { background-color: #ffffff; color: #0f172a; }
+  .sec-dark  { background-color: #000000; color: #ffffff; }
+
+  .sec-light :is(h1, h2, h3) { color: #0f172a; }
+  .sec-dark  :is(h1, h2, h3) { color: #ffffff; }
+
+  .sec-light .muted { color: #64748b; }
+  .sec-dark  .muted { color: rgba(255, 255, 255, 0.6); }
+
+  .sec-light .card { background-color: #ffffff; border: 1px solid #e2e8f0; }
+  .sec-dark  .card { background-color: #0d0f14; border: 1px solid rgba(255, 255, 255, 0.1); }
+
+  .sec-light .card :is(p, li) { color: #475569; }
+  .sec-dark  .card :is(p, li) { color: rgba(255, 255, 255, 0.65); }
+
+  .sec-light .card strong { color: #0f172a; }
+  .sec-dark  .card strong { color: #ffffff; }
+
+  .sec-light .card code { background-color: #f1f5f9; color: #0f172a; border-radius: 0.25rem; padding: 0 0.25rem; }
+  .sec-dark  .card code { background-color: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.9); border-radius: 0.25rem; padding: 0 0.25rem; }
+
+  /* Îlots sombres autonomes (showcases + code), lisibles sur tout fond. */
+  .landing-panel { color: rgba(255, 255, 255, 0.85); }
+  .landing-panel :is(h1, h2, h3) { color: #ffffff; }
+
+  /* Texte gris (blancs translucides text-white/XX) des panels → blanc pur.
+     Exclut les blocs de code (pre) pour préserver la coloration syntaxique
+     et l'atténuation volontaire des mots-clés. N'affecte ni l'orange accent
+     ni les couleurs hex (qui n'ont pas de classe text-white/...). */
+  .landing-panel :not(pre *)[class*="text-white/"] {
+    color: #ffffff !important;
+  }
+
+  /* === Nav responsive : hamburger sous 1098px (LANDING-NAV-HAMBURGER-001) ===
+     Au-dessus du seuil, les liens sont inline et le bouton est masqué.
+     Sous 1098px, les liens basculent en panneau déroulant ouvert par le
+     bouton hamburger (#nav-toggle), positionné sous la barre fixe (h-32). */
+  .landing-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  /* Survol : soulignement orange sous l'option (border transparente par
+     défaut pour ne pas décaler la hauteur). */
+  .landing-nav-links a {
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.15s;
+  }
+
+  .landing-nav-links a:hover {
+    border-bottom-color: #E8651A;
+  }
+
+  .landing-nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: 0.75rem;
+  }
+
+  @media (max-width: 1098px) {
+    /* Panneau toujours rendu (fixé sous la barre), révélé par transition de
+       hauteur. box-sizing:border-box (preflight) → padding replié quand
+       max-height:0. La variable --nav-push (posée en JS = hauteur réelle du
+       menu) pilote à la fois la hauteur du panneau ET la descente du hero,
+       donc les deux s'animent ensemble et rien n'est recouvert. */
+    .landing-nav-links {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+      position: fixed;
+      top: 8rem;
+      left: 0;
+      right: 0;
+      background: #000;
+      padding: 0 2rem;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.25s ease,
+                  padding 0.3s ease, border-color 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .landing-nav-links.is-open {
+      max-height: var(--nav-push, 24rem);
+      opacity: 1;
+      padding: 1.5rem 2rem;
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+    .landing-nav-toggle {
+      display: flex;
+    }
+    /* Le hero descend exactement de la hauteur du menu ouvert. */
+    #top {
+      margin-top: var(--nav-push, 0px);
+      transition: margin-top 0.3s ease;
+    }
+  }
+}

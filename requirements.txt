@@ -1,0 +1,4 @@
+# Dependances du projet Forge.
+# Le framework et ses dependances runtime (MariaDB, python-dotenv, Jinja2,
+# Argon2, jsonschema) sont fournis par le paquet forge-mvc.
+forge-mvc==1.0.0b15
